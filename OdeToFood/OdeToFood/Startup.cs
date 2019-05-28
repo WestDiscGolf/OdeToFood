@@ -36,11 +36,16 @@ namespace OdeToFood
                 options.UseSqlServer(Configuration.GetConnectionString("OdeToFoodDb"));
             });
 
-            services.AddScoped<IRestaurantData, SqlRestaurantData>();
-            //services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
-
+            services.Scan(x =>
+            {
+                x.FromAssemblyOf<IRestaurantData>()
+                    .AddClasses(classes => classes.AssignableTo<IRestaurantData>())
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime();
+            });
+            
             // Add the decorator implementations after the
-            services.Decorate<IRestaurantData, CachedRestaurantData>();
+            services.Decorate<IReadOnlyRestaurantData, CachedRestaurantData>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
