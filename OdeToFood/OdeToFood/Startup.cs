@@ -39,7 +39,6 @@ namespace OdeToFood
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             // aspnetcore30
             services.AddRazorPages();
             services.AddControllers();
