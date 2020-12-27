@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OdeToFood.Data;
+using OdeToFood.ViewComponents;
 
 namespace OdeToFood
 {
@@ -21,6 +22,7 @@ namespace OdeToFood
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddConfig<RestaurantCountCacheSettings>(Configuration.GetSection("RestaurantCountCacheSettings"));
 
             services.AddDbContextPool<OdeToFoodDbContext>(options =>
             {
