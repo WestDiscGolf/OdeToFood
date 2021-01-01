@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OdeToFood.Core;
 using OdeToFood.Data;
-using OdeToFood.ViewComponents;
 
 namespace OdeToFood
 {
@@ -22,7 +22,7 @@ namespace OdeToFood
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddConfig<RestaurantCountCacheSettings>(Configuration.GetSection("RestaurantCountCacheSettings"));
+            services.AddConfig<RestaurantCacheSettings>(Configuration.GetSection("RestaurantCacheSettings"));
 
             services.AddDbContextPool<OdeToFoodDbContext>(options =>
             {
@@ -31,6 +31,9 @@ namespace OdeToFood
 
             services.AddScoped<IRestaurantData, SqlRestaurantData>();
             //services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+
+            // Add the decorator implementations after the
+            services.Decorate<IRestaurantData, CachedRestaurantData>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
