@@ -14,7 +14,7 @@ namespace OdeToFood.Pages.Restaurants
     public class ListModel : PageModel
     {
         private readonly IConfiguration config;
-        private readonly IRestaurantData restaurantData;
+        private readonly IReadOnlyRestaurantData restaurantData;
         private readonly ILogger<ListModel> logger;
 
         public string Message { get; set; }
@@ -23,8 +23,8 @@ namespace OdeToFood.Pages.Restaurants
         [BindProperty(SupportsGet =true)]
         public string SearchTerm { get; set; }
 
-        public ListModel(IConfiguration config, 
-                         IRestaurantData restaurantData,
+        public ListModel(IConfiguration config,
+                         IReadOnlyRestaurantData restaurantData,
                          ILogger<ListModel> logger)
         {
             this.config = config;

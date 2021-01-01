@@ -5,13 +5,13 @@ using OdeToFood.Core;
 
 namespace OdeToFood.Data
 {
-    public class CachedRestaurantData : IRestaurantData
+    public class CachedRestaurantData : IReadOnlyRestaurantData
     {
-        private readonly IRestaurantData _repository;
+        private readonly IReadOnlyRestaurantData _repository;
         private readonly IDistributedCache _cache;
         private readonly RestaurantCacheSettings _settings;
 
-        public CachedRestaurantData(IRestaurantData repository, IDistributedCache cache, RestaurantCacheSettings settings)
+        public CachedRestaurantData(IReadOnlyRestaurantData repository, IDistributedCache cache, RestaurantCacheSettings settings)
         {
             _repository = repository;
             _cache = cache;
@@ -26,21 +26,6 @@ namespace OdeToFood.Data
         public Restaurant GetById(int id)
         {
             return _repository.GetById(id);
-        }
-
-        public Restaurant Update(Restaurant updatedRestaurant)
-        {
-            return _repository.Update(updatedRestaurant);
-        }
-
-        public Restaurant Add(Restaurant newRestaurant)
-        {
-            return _repository.Add(newRestaurant);
-        }
-
-        public Restaurant Delete(int id)
-        {
-            return _repository.Delete(id);
         }
 
         public int GetCountOfRestaurants()
@@ -59,11 +44,6 @@ namespace OdeToFood.Data
             }
 
             return count; 
-        }
-
-        public int Commit()
-        {
-            return _repository.Commit();
         }
     }
 }

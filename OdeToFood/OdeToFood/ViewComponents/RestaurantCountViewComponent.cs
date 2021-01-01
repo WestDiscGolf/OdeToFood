@@ -5,9 +5,9 @@ namespace OdeToFood.ViewComponents
 {
     public class RestaurantCountViewComponent : ViewComponent
     {
-        private readonly IRestaurantData _restaurantData;
+        private readonly IReadOnlyRestaurantData _restaurantData;
         
-        public RestaurantCountViewComponent(IRestaurantData restaurantData)
+        public RestaurantCountViewComponent(IReadOnlyRestaurantData restaurantData)
         {
             _restaurantData = restaurantData;
         }
