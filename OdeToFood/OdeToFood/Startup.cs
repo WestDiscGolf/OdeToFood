@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OdeToFood.Core;
 using OdeToFood.Data;
+using OdeToFood.ViewComponents;
 
 namespace OdeToFood
 {
